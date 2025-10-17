@@ -7,10 +7,10 @@ source('scripts/00_packages.R')
 # 1. Load data #
 #--------------#
 
-train_personas = import('stores/output/01_train_personas.rds',setclass = 'tibble')
-train_hogares = import('stores/output/01_train_hogares.rds',setclass = 'tibble')
-test_personas = import('stores/output/01_test_personas.rds',setclass = 'tibble')
-test_hogares = import('stores/output/01_test_hogares.rds',setclass = 'tibble')
+train_personas = import('stores/output/01_import/01_train_personas.rds',setclass = 'tibble')
+train_hogares = import('stores/output/01_import/01_train_hogares.rds',setclass = 'tibble')
+test_personas = import('stores/output/01_import/01_test_personas.rds',setclass = 'tibble')
+test_hogares = import('stores/output/01_import/01_test_hogares.rds',setclass = 'tibble')
 
 #---------------------#
 # 2. Feature Cleaning #
@@ -273,5 +273,5 @@ db_test = db_test %>%
 # 6. Export data #
 #----------------#
 
-export(db_train,'stores/output/02_train.rds')
-export(db_test,'stores/output/02_test.rds')
+export(db_train,'stores/output/02_wrangle/02_train.rds')
+export(db_test,'stores/output/02_wrangle/02_test.rds')

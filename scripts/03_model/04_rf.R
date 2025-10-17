@@ -7,8 +7,8 @@ source('scripts/00_packages.R')
 # 1. Load data #
 #--------------#
 
-train = import('stores/output/02_train.rds',setclass = 'tibble')
-test = import('stores/output/02_test.rds',setclass = 'tibble')
+train = import('stores/output/02_wrangle/02_train.rds',setclass = 'tibble')
+test = import('stores/output/02_wrangle/02_test.rds',setclass = 'tibble')
 
 #---------------#
 # 2. Split data #

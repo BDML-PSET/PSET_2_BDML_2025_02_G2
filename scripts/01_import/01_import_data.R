@@ -33,7 +33,7 @@ train_hogares = train_hogares %>%
 # 4. Export data #
 #----------------#
 
-export(train_personas,'stores/output/01_train_personas.rds')
-export(train_hogares,'stores/output/01_train_hogares.rds')
-export(test_personas,'stores/output/01_test_personas.rds')
-export(test_hogares,'stores/output/01_test_hogares.rds')
+export(train_personas,'stores/output/01_import/01_train_personas.rds')
+export(train_hogares,'stores/output/01_import/01_train_hogares.rds')
+export(test_personas,'stores/output/01_import/01_test_personas.rds')
+export(test_hogares,'stores/output/01_import/01_test_hogares.rds')
