@@ -45,7 +45,7 @@ f_process_hogares = function(data){
   df = df %>% 
     dummy_cols(c('dominio','depto','tipo_propiedad_vivienda_hogar'),
                remove_first_dummy = TRUE,
-               remove_selected_columns = TRUE)
+               remove_selected_columns = FALSE)
   
   ### Clean variable names
   df = df %>% 
@@ -256,8 +256,21 @@ db_test = db_test %>%
           relocate(.after = id, any_of(c('lp','ingpcug')))
 
 
+#------------------------------#
+# 5. Final cleaning covariates #
+#------------------------------#
+
+db_train = db_train %>% 
+           select(-id,-ingpcug) %>% 
+           mutate(across(ends_with('_household_working'),.fns = function(x) replace_na(x,0)),
+                  pobre = factor(pobre,levels = c('1','0'),labels = c('Yes','No')))
+
+db_test = db_test %>%
+          select(-dominio,-depto) %>% 
+          mutate(across(ends_with('_household_working'),.fns = function(x) replace_na(x,0))) 
+
 #----------------#
-# 5. Export data #
+# 6. Export data #
 #----------------#
 
 export(db_train,'stores/output/02_train.rds')
