@@ -261,7 +261,7 @@ db_test = db_test %>%
 #------------------------------#
 
 db_train = db_train %>% 
-           select(-id,-ingpcug) %>% 
+           select(-depto,-dominio,-id,-ingpcug) %>% 
            mutate(across(ends_with('_household_working'),.fns = function(x) replace_na(x,0)),
                   pobre = factor(pobre,levels = c('1','0'),labels = c('Yes','No')))
 
