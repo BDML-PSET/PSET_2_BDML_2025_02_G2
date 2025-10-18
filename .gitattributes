@@ -1,0 +1,2 @@
+stores/output/03_models/03_model_cart.rds filter=lfs diff=lfs merge=lfs -text
+stores/input/train_personas.csv filter=lfs diff=lfs merge=lfs -text
