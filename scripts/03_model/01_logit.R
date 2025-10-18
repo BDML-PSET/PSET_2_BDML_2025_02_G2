@@ -37,6 +37,7 @@ ctrl <- trainControl(
           savePredictions = TRUE)
 
 # Entrenar modelo logístico
+set.seed(2025)
 logit_fit <- train(pobre ~ ., 
                    data = df_train,
                    method = "glm",
@@ -54,24 +55,14 @@ predictions_df_test= df_test %>%
 
 f_meas(data = predictions_df_test,truth = pobre,estimate = poor)
 
-# Predicciones sobre test
-preds <- predict(logit_fit, newdata = df_test)
-probs <- predict(logit_fit, newdata = df_test, type = "prob")
+# Predicciones sobre test - kaggle
+predictions_bayes = test %>% 
+                    mutate(pobre = predict(logit_fit,test),
+                           pobre = ifelse(pobre == 'Yes',1,0)) %>% 
+                    select(id,pobre)
 
-# Matriz de confusión
-confusionMatrix(preds, df_test$pobre)
-
-test1 <- test %>%
-          mutate(
-            .pred_class = predict(logit_fit, newdata = test),
-            .pred_prob  = predict(logit_fit, newdata = test, type = "prob")[, 2])
-
-# Seleccionar columnas para exportar
-csv <- test1 %>%
-       select(id, pobre = .pred_class)
-
-#-----------------------------#
-# 5. Exportar resultados      #
-#-----------------------------#
-csv <- df_results %>%
-       select(id, pobre = pred_class)
+#------------------------#
+#      exportar datos    #
+#------------------------#
+export(logit_fit, "stores/output/03_models/01_model_logit.rds")
+export(predictions_bayes, "stores/output/03_models/01_model_predictions.csv")
