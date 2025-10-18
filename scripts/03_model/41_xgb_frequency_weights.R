@@ -1,25 +1,14 @@
 ### setup
 cat("\f")
 rm(list = ls())
-library(pacman)
-p_load(tidyverse,rio,janitor,data.table,
-       tidymodels,glmnet,ranger,xgboost,caret,baguette,rpart,ipred,
-       pROC,themis,finetune,future,parallel,doParallel,bonsai,parallel,MLmetrics,gbm,
-       tictoc)
-options(tidymodels.dark = T)
+source("scripts/00_packages.R")
 
 #--------------#
 # 1. Load data #
 #--------------#
 
-train = import('01_data/output/02_train.rds',setclass = 'tibble') %>% 
-  select(-id,-dominio,-depto,-ingpcug) %>% 
-  mutate(across(ends_with('_household_working'),.fns = function(x) replace_na(x,0))) %>% 
-  mutate(pobre = factor(pobre,levels = c('1','0'),labels = c('Yes','No')))
-
-test = import('01_data/output/02_test.rds',setclass = 'tibble') %>% 
-  select(-dominio,-depto) %>% 
-  mutate(across(ends_with('_household_working'),.fns = function(x) replace_na(x,0)))
+train = import('stores/output/02_wrangle/02_train.rds',setclass = 'tibble')
+test = import('stores/output/02_wrangle/02_test.rds',setclass = 'tibble')
 
 #---------------#
 # 2. Split data #
@@ -48,6 +37,7 @@ model = caret::train(pobre ~ .,
                      data = df_train,
                      method = "xgbTree",
                      metric = 'F',
+                     nthread = (parallel::detectCores() - 1), 
                      trControl = trainControl(method = 'cv',
                                               number = 5,
                                               summaryFunction = multiStats,

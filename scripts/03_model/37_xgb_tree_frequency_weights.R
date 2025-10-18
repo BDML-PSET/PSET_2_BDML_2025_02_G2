@@ -1,7 +1,7 @@
 ### setup
 cat("\f")
 rm(list = ls())
-source('scripts/00_packages.R')
+source("scripts/00_packages.R")
 
 #--------------#
 # 1. Load data #
@@ -37,31 +37,35 @@ model = caret::train(pobre ~ .,
                      data = df_train,
                      method = "xgbTree",
                      metric = 'F',
-                     weights = wts,
-                     trControl = trainControl(method = 'none',
-                                              summaryFunction = multiStats,
-                                              classProbs = TRUE),
-                     tuneGrid = expand.grid(nrounds = c(500),
-                                            max_depth = c(8),
-                                            eta = c(0.03),
-                                            min_child_weight = c(25),
-                                            gamma = c(0),
-                                            colsample_bytree = c(0.8),
-                                            subsample = c(0.9)))
+                     weights = wts, 
+                     nthread = (parallel::detectCores() - 1), 
+                     trControl = trainControl(method = 'cv',
+                                             number = 5,
+                                             summaryFunction = multiStats,
+                                             classProbs = TRUE, 
+                                             verboseIter = T),
+                     tuneGrid = expand.grid(nrounds = c(400, 500),
+                                            max_depth = c(6, 8, 10),
+                                            eta = c(0.03, 0.05),
+                                            min_child_weight = c(20, 25),
+                                            gamma = c(0,1),
+                                            colsample_bytree = c(0.8, 0.9),
+                                            subsample = c(0.9, 1)))
+
 
 #------------------#
 # 4. Adjust cutoff #
 #------------------#
 
 predicted_value_validation = predict(model,df_validation,type = 'prob') %>% 
-  bind_cols(df_validation %>% select(pobre))
+                            bind_cols(df_validation %>% select(pobre))
 
 
 ### Optimize SENS SPEC
 rfROC = roc(predicted_value_validation$pobre, predicted_value_validation$Yes, levels = rev(levels(predicted_value_validation$pobre)))
 rfThresh = coords(rfROC, x = "best", best.method = "closest.topleft");rfThresh
 
-### Optimize F1
+### Optimize F1)
 roc_obj_rf =  roc(response = predicted_value_validation$pobre,  # Valores reales de la variable objetivo
                   predictor = predicted_value_validation$Yes, # Probabilidades predichas por el modelo
                   levels = c("No", "Yes"),  # # Establece la referencia control y caso (empleado = negativo, desempleado = positivo) 
@@ -102,19 +106,25 @@ predicted_value_test %>%
 # 10.  Final predictions #
 #------------------------#
 
+predictions_bayes = test %>% 
+  mutate(pobre = predict(model,test),
+         pobre = ifelse(pobre == 'Yes',1,0)) %>% 
+  select(id,pobre) 
+
 final_predicitions = predict(model,test,type = 'prob') %>% 
-                     bind_cols(test %>% select(id))%>% 
-                     mutate(pobre = ifelse(Yes >= rfThresh$threshold,1,0)) %>% 
-                     select(id,pobre)
+  bind_cols(test %>% select(id))%>% 
+  mutate(pobre = ifelse(Yes >= rfThresh$threshold,1,0)) %>% 
+  select(id,pobre)
 
 final_predicitions_f1 = predict(model,test,type = 'prob') %>% 
-                        bind_cols(test %>% select(id))%>% 
-                        mutate(pobre = ifelse(Yes >= rfThreshF1,1,0)) %>% 
-                        select(id,pobre)
+  bind_cols(test %>% select(id))%>% 
+  mutate(pobre = ifelse(Yes >= rfThreshF1,1,0)) %>% 
+  select(id,pobre)
 
-#-------------#
-# 11. Export  #
-#-------------#
 
-export(final_predicitions,file = 'stores/output/03_models/37_xgboost_case_weights_trees_500_td_8_eta_0.03_min_n_25_gamma_0_cols_0.8_ss_0.9.csv')
-export(final_predicitions_f1,file = 'stores/output/03_models/37_xgboost_optimize_f1_case_weights_trees_500_td_8_eta_0.03_min_n_25_gamma_0_cols_0.8_ss_0.9.csv')
+# #-------------#
+# # 11. Export 
+export(model,'stores/output/03_models/37_xgb_tree_weights_nrounds.rds')
+export(final_predicitions,file = 'stores/output/03_models/37_xgboost_case_weights.csv')
+export(final_predicitions_f1,file = 'stores/output/03_models/37_xgboost_optimize_f1_case_weights.csv')
+export(predictions_bayes,file = 'stores/output/03_models/37_xgb_tree_weights_bayes_rule.csv')
