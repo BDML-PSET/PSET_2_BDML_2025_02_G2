@@ -6,28 +6,27 @@ source('scripts/00_packages.R')
 #--------------#
 # 1. Load data #
 #--------------#
+# funcion para importar datos de kaggle
+kaggle_import = function(user_json, file_name){
 
-train_hogares = import('stores/input/train_hogares.csv',setclass = 'tibble') %>% clean_names() %>% filter(depto != 11)
-train_personas = import('stores/input/train_personas.csv',setclass = 'tibble') %>% clean_names() %>% filter(depto != 11)
-test_hogares = import('stores/input/test_hogares.csv',setclass = 'tibble') %>% clean_names()
-test_personas = import('stores/input/test_personas.csv',setclass = 'tibble') %>% clean_names()
+  # credentials
+  kaggle <- fromJSON(user_json)
+  auth <- authenticate(kaggle$username, kaggle$key, type = "basic")
+  
+  # download file
+  url <- paste0("https://www.kaggle.com/api/v1/competitions/data/download/uniandes-bdml-2025-20-ps-2/", file_name)
+  res <- GET(url, auth)
+  
+  # read file
+  data <- read.csv(text = content(res, "text", encoding = "UTF-8"))
+  return(data)
+}
 
-#--------------------------------------#
-# 2. Covariates available on test data #
-#--------------------------------------#
+train_personas =  kaggle_import("kaggle.json", "train_personas.csv") |> clean_names() %>% filter(depto != 11)
+train_hogares = kaggle_import("kaggle.json", "train_hogares.csv") |> clean_names() %>% filter(depto != 11)
 
-vars_test_hogares = import('stores/input/test_hogares.csv',setclass = 'tibble') %>% clean_names() %>% colnames()
-vars_test_personas = import('stores/input/test_personas.csv',setclass = 'tibble') %>% clean_names() %>% colnames()
-
-#---------------------------------------------------------------------#
-# 3. Select covariates that are available at both test and train data #
-#---------------------------------------------------------------------#
-
-train_personas = train_personas %>% 
-                 select(all_of(c(vars_test_personas)))
-
-train_hogares = train_hogares %>% 
-                select(all_of(c(vars_test_hogares,"pobre","ingpcug")))
+test_personas = kaggle_import("kaggle.json", "test_personas.csv") |> clean_names()
+test_hogares = kaggle_import("kaggle.json", "test_hogares.csv") |> clean_names()
 
 #----------------#
 # 4. Export data #

@@ -12,6 +12,19 @@ train_hogares = import('stores/output/01_import/01_train_hogares.rds',setclass =
 test_personas = import('stores/output/01_import/01_test_personas.rds',setclass = 'tibble')
 test_hogares = import('stores/output/01_import/01_test_hogares.rds',setclass = 'tibble')
 
+# select columns
+vars_test_hogares = import('stores/input/test_hogares.csv',setclass = 'tibble') %>% clean_names() %>% colnames()
+vars_test_personas = import('stores/input/test_personas.csv',setclass = 'tibble') %>% clean_names() %>% colnames()
+
+train_personas = train_personas %>% 
+                 select(all_of(c(vars_test_personas)))
+
+train_hogares = train_hogares %>% 
+                select(all_of(c(vars_test_hogares,"pobre","ingpcug")))
+
+# rm 
+rm(vars_test_hogares, vars_test_personas)
+
 #---------------------#
 # 2. Feature Cleaning #
 #---------------------#
