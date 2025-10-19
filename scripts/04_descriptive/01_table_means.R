@@ -2,6 +2,9 @@
 ## Yesenia F   ##
 ## =========== ##
 
+### setup
+cat("\f")
+rm(list = ls())
 source("scripts/00_packages.R")
 
 
@@ -9,12 +12,17 @@ library(tidyverse)
 library(knitr)
 library(kableExtra)
 
+train_income = import("stores/output/03_models/00_rf_train.csv",setclass = 'tibble')
+
 db = import("stores/output/02_wrangle/02_train.rds")
+
+db = left_join(db,  train_income, by ="id")
+
 
 #==============================#
 # 1. Definir las variables de interés
 #==============================#
-vars_filtrar <- c(
+vars_filtrar <- c('ing_unidad_gasto_imputado_per_capita_predicted',
   "cantidad_cuartos", "cantidad_cuartos_para_dormir",
   "tipo_propiedad_vivienda_hogar", "numero_personas_hogar", "arriendo",
   "urbano", "edad_household_average", "female_household_average",
@@ -31,6 +39,7 @@ vars_filtrar <- c(
 db <- db[, vars_filtrar]
 
 vars_continuas <- c(
+  'ing_unidad_gasto_imputado_per_capita_predicted',
   "cantidad_cuartos", "cantidad_cuartos_para_dormir", "numero_personas_hogar", "arriendo",
   "edad_household_average", "female_household_average", "informal_household_average",
   "regimen_salud_3_household_average",
@@ -43,6 +52,7 @@ vars_continuas <- c(
 vars_categoricas <- c(
   "tipo_propiedad_vivienda_hogar", "urbano"
 )
+
 dummies <- c("hh_oc", "hh_des", "hh_female",
              "hh_regimen_salud_3", "hh_ocupado_relab_4")
 
