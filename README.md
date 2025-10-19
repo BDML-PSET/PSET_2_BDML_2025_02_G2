@@ -7,6 +7,7 @@ Este proyecto tiene como objetivo predecir la condición de pobreza de los hogar
 <!---------------------------------------------------------------------->
 ## scripts
 Esta carpeta contiene cuatro (4) subcarpetas que almacenan los códigos necesarios en cada tarea, a continuación se ennuncia cada una: 
+
 📁01_import: el código contenido en esta carpeta importa los datos crudos del train y test para hogares y personas y hace la selección común de variables. 
 📁02_wrangle: el código contenido en esta carpeta realiza la selección de variables, la recodificación y limpieza de datoss.
 📁03_model : los códigos contenidos en esta carpeta realizan los diferentes modelos de predicción utilizados en la competencia: Logit, Logit EN, XGboost y Random Forest.  
@@ -27,5 +28,3 @@ Esta carpeta contiene dos (2) carpetas principales:
 
 <!---------------------------------------------------------------------->
 <!---------------------------------------------------------------------->
-<!---------------------------------------------------------------------->
-### views
