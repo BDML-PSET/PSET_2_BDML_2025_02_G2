@@ -1,0 +1,14 @@
+\centering
+\begin{tabular}{>{}l>{}lcc}
+\toprule
+\multicolumn{2}{c}{\textbf{ }} & \multicolumn{2}{c}{\textbf{Verdadero}} \\
+\cmidrule(l{3pt}r{3pt}){3-4}
+\textbf{} & \textbf{} & \textbf{Sí} & \textbf{No}\\
+\midrule
+\textbf{Predicho} & \textbf{Sí} & 80.09 \% & 10.09 \%\\
+\textbf{} & \textbf{No} & 19.91 \% & 89.91 \%\\
+\bottomrule
+\multicolumn{4}{l}{\rule{0pt}{1em}Valores estandarizados por columna}\\
+\multicolumn{4}{l}{\rule{0pt}{1em}Observaciones (Sí, No): 6368, 24511}\\
+\end{tabular}
+

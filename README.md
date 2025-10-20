@@ -8,8 +8,7 @@ Este proyecto tiene como objetivo predecir la condición de pobreza de los hogar
 ## scripts
 Esta carpeta contiene cuatro (4) subcarpetas que almacenan los códigos necesarios en cada tarea, a continuación se ennuncia cada una: 
 
-📁01_import: el código contenido en esta carpeta importa los datos crudos del train y test para hogares y personas y hace la selección común de variables. 
-
+📁01_import: El código contenido en está carpeta descarga automáticamente los datos crudos de train y test para hogares y personas desde Kaggle. Para ello, es necesario contar con credenciales válidas en un archivo kaggle.json asociado a una cuenta con acceso a la competencia, el cual debe ubicarse en la carpeta principal del proyecto PSET_2_BDML_2025_02_G2.
 
 📁02_wrangle: el código contenido en esta carpeta realiza la selección de variables, la recodificación y limpieza de datos.
 

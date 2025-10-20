@@ -1,0 +1,11 @@
+\centering
+\begin{tabular}{>{}lcccc}
+\toprule
+\textbf{Clase} & \textbf{Precisión} & \textbf{Recall} & \textbf{F1-score} & \textbf{Observaciones}\\
+\midrule
+\textbf{Pobre (Sí)} & 0.67 & 0.8 & 0.73 & 6430\\
+\textbf{Pobre (No)} & 0.95 & 0.9 & 0.92 & 24449\\
+\textbf{Accuracy} &  &  & 0.88 & 30879\\
+\bottomrule
+\end{tabular}
+
