@@ -275,4 +275,4 @@ table_latex <- tabla_completa |>
 
 
 # Guardar manualmente el resultado en un archivo .tex
-writeLines(table_latex, "stores/visuals/tabla_descriptiva.tex")
+writeLines(table_latex, "stores/output/04_visual/tabla_descriptiva.tex")
