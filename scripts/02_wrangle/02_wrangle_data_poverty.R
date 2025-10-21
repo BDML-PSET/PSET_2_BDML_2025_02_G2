@@ -7,10 +7,10 @@ source('scripts/00_packages.R')
 # 1. Load data #
 #--------------#
 
-train_personas = import('stores/output/01_import/01_train_personas.rds',setclass = 'tibble')
-train_hogares = import('stores/output/01_import/01_train_hogares.rds',setclass = 'tibble')
-test_personas = import('stores/output/01_import/01_test_personas.rds',setclass = 'tibble')
-test_hogares = import('stores/output/01_import/01_test_hogares.rds',setclass = 'tibble')
+train_personas = import('stores/output/01_import/01_train_personas.rds',setclass = 'tibble')%>% filter(depto != 11)
+train_hogares = import('stores/output/01_import/01_train_hogares.rds',setclass = 'tibble')%>% filter(depto != 11)
+test_personas = import('stores/output/01_import/01_test_personas.rds',setclass = 'tibble')%>% filter(depto != 11)
+test_hogares = import('stores/output/01_import/01_test_hogares.rds',setclass = 'tibble')%>% filter(depto != 11)
 
 # select columns
 vars_test_hogares = import('stores/input/test_hogares.csv',setclass = 'tibble') %>% clean_names() %>% colnames()

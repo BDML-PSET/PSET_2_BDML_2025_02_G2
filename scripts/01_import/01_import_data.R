@@ -22,8 +22,8 @@ kaggle_import = function(user_json, file_name){
   return(data)
 }
 
-train_personas =  kaggle_import("kaggle.json", "train_personas.csv") |> clean_names() %>% filter(depto != 11)
-train_hogares = kaggle_import("kaggle.json", "train_hogares.csv") |> clean_names() %>% filter(depto != 11)
+train_personas =  kaggle_import("kaggle.json", "train_personas.csv") |> clean_names()
+train_hogares = kaggle_import("kaggle.json", "train_hogares.csv") |> clean_names() 
 
 test_personas = kaggle_import("kaggle.json", "test_personas.csv") |> clean_names()
 test_hogares = kaggle_import("kaggle.json", "test_hogares.csv") |> clean_names()
