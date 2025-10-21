@@ -1,0 +1,52 @@
+\begin{table}[!h]
+\centering
+\small
+\caption{Resultados de la validación cruzada en la selección de modelos}
+\label{tab:cross_validation}
+\begin{tabular}{p{2.8cm} p{5cm} p{4cm} ccc}
+\toprule
+\textbf{Algoritmo} & \textbf{Rangos de búsqueda} & \textbf{Mejor modelo} & \textbf{F1} & \textbf{Recall} & \textbf{Precision} \\
+\midrule
+\shortstack[l]{Logit} & --- & --- & 0.654 & 0.595 & 0.726 \\
+\addlinespace[6pt]
+
+\shortstack[l]{Logit\\Elastic Net} & 
+\shortstack[l]{alpha [0–1]\\lambda [0.001–1000]} &
+\shortstack[l]{alpha = 0.5\\lambda = 0.001} &
+0.647 & 0.585 & 0.725 \\
+\addlinespace[6pt]
+
+\shortstack[l]{CART} & 
+cp [2e-04–0.0628] &
+cp = 2e-04 &
+0.651 & 0.602 & 0.710 \\
+\addlinespace[6pt]
+
+\shortstack[l]{Random\\Forest} &
+\shortstack[l]{mtry [12–150]\\min.node.size [5–10]} &
+\shortstack[l]{mtry = 75\\min.node.size = 10} &
+0.681 & 0.620 & 0.756 \\
+\addlinespace[6pt]
+
+\shortstack[l]{XGBoost\\(con pesos)} &
+\shortstack[l]{eta [0.03–0.05]\\max\_depth [6–10]\\gamma [0–1]\\colsample\_bytree [0.8–0.9]\\min\_child\_weight [20–25]\\subsample [0.9–1]\\nrounds [400–500]} &
+\shortstack[l]{eta = 0.05\\max\_depth = 10\\gamma = 1\\colsample\_bytree = 0.9\\min\_child\_weight = 20\\subsample = 1\\nrounds = 500} &
+0.719 & 0.832 & 0.633 \\
+\addlinespace[6pt]
+
+\shortstack[l]{XGBoost\\(sin pesos)} &
+\shortstack[l]{eta [0.02–0.04]\\max\_depth [5–7]\\gamma [0]\\colsample\_bytree [0.6–0.7]\\min\_child\_weight [25]\\subsample [0.8–0.9]\\nrounds [500]} &
+\shortstack[l]{eta = 0.04\\max\_depth = 7\\gamma = 0\\colsample\_bytree = 0.6\\min\_child\_weight = 25\\subsample = 0.8\\nrounds = 500} &
+0.708 & 0.664 & 0.758 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\medskip
+\begin{minipage}{\textwidth}
+
+\tiny
+\textit{Nota:}  Esta tabla muestra,los algoritmos usados, los valores explorados de cada hiperparametro, el mejor modelo según la validación cruzada en cinco partes y el promedio del rendimiento del mejor modelo. 
+
+\end{minipage}
+
+

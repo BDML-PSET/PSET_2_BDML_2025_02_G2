@@ -1,0 +1,14 @@
+%%% conslusion %%%
+
+\section{Conclusión}
+
+
+
+
+Este trabajo buscó dar solución a la pregunta ¿cómo identificar con precisión el estado de pobreza de los hogares a partir de los datos recolectados sobre sus miembros?, de esta manera desarrollar formas más eficientes de identificación que la identificación por censos. Para ello, se entrenaron y compararon distintos modelos de clasificación supervisada, entre ellos: regresión logística,  Elastic Net, CART,  Random Forest y XGBoost.
+
+Entre todos los modelos entrenados, XGBoost se destacó como el de mejor desempeño predictivo, obteniendo el mayor valor del F1-score en el conjunto de validación y mostrando un adecuado equilibrio entre sensibilidad y especificidad. Este alto rendimiento puede atribuirse a la capacidad del modelo para capturar relaciones no lineales y efectos de interacción entre variables, así como a su robustez frente a outliers y ruido en los datos. Al mismo tiempo, se hicieron diversos refinamientos de peso de clases, para dar más peso a la clase que nos interesa pero que tiene menos observaciones, y búsquedas de grillas de acuerdo a lo sugerido por la literatura, pero al mismo tiempo, por el conocimiento acumulado al realizar varios intentos y probar diferentes grillas. 
+
+Al examinar las variables más relevantes según la importancia atribuida por el modelo XGBoost, se evidencia el alto peso predictivo de factores como el valor imputado del arriendo, el número de personas afiliadas al régimen contributivo de salud, el promedio de personas ocupadas en el hogar, los ingresos de la unidad de gasto, la línea de pobreza y la condición de tenencia de la vivienda, entre otros. Estas variables reflejan dimensiones estructurales del hogar, y su comportamiento revela patrones consistentes: los hogares en condición de pobreza tienden a presentar una menor participación en el empleo formal, lo que a su vez limita su acceso a esquemas de salud contributiva, propiedad de la vivienda o inserción en empresas formales. En conjunto, estos hallazgos refuerzan la noción de que la pobreza no solo implica una baja en el ingreso, sino también una exclusión sistémica de redes de protección social y del mercado laboral formal.
+
+Como posibles caminos para mejorar estos resultados, se plantean dos estrategias complementarias. En primer lugar, incorporar fuentes de información geoespacial, como los niveles de iluminación nocturna satelital, permitiría capturar desigualdades territoriales que no son evidentes en los registros tradicionales, y que pueden reflejar condiciones estructurales del entorno. En segundo lugar, explorar modelos ensamblados o apilados (stacking) podría potenciar la capacidad predictiva del sistema, al combinar las fortalezas de diferentes algoritmos, que puede traducirse en una clasificación más robusta y generalizable.

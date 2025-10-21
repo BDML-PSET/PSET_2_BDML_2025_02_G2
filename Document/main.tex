@@ -1,0 +1,69 @@
+
+%====== settings =======%
+\documentclass[12pt]{article}
+\input{packages/packages}
+
+%=======tittle=========%
+\begin{document}
+\fancyhead[C]{}
+\hrule \medskip 
+\begin{minipage}{0.295\textwidth} 
+\raggedright   
+Ángel de Jesús Castillo\\
+\textbf{202516144}\\
+Yesenia Paola Fontalvo\\
+\textbf{202516148}\\
+Alejandro Cardiles\\
+\textbf{202516146}\\
+Laura Ortiz Pérez\\
+\textbf{201622043}\\
+\end{minipage}
+\begin{minipage}{0.4\textwidth} 
+\centering 
+\huge 
+Problem Set II\\ 
+\vspace{2mm}
+\normalsize 
+Predicting Poverty\\ 
+2025-II\\ 
+
+\vspace{5mm}
+Fecha de Entrega: 19 de octubre, 2025 \\
+
+\end{minipage}
+\begin{minipage}{0.295\textwidth} 
+\begin{figure}[H]
+\raggedleft
+\includegraphics[scale=0.3]{visuals/uniandes.pdf}
+\end{figure}
+\hfill
+\end{minipage}
+\medskip\hrule 
+\bigskip
+\renewcommand{\solutiontitle}{\noindent\textbf{Solución:}\par\noindent}
+
+
+%======= 01 introduction =========%
+\input{section/01_introduction}
+
+%======= 02 data =========%
+\input{section/02_data}
+
+%======= 03_models=========%
+\input{section/03_models}
+
+%======= 04_conslusion =========%
+\input{section/04_conclusion}
+
+
+%======= 06_references =========%
+%======= 06_references =========%
+\newpage
+\bibliographystyle{apalike}
+\bibliography{references/references}
+%======= 07_anexo =========%
+\newpage
+
+
+\end{document}
+

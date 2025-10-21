@@ -1,0 +1,83 @@
+%%% Basic document setup 
+\usepackage{booktabs}
+\usepackage{microtype} % Better typography
+\usepackage[english]{babel}
+\usepackage[mdpgd-garamond]{mathdesign}
+\usepackage{etex}
+\usepackage{longtable}
+%%% Mathematics packages %%%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tabularx}
+
+%%% Formatting and style %%%
+\usepackage{parskip}
+\usepackage[left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm,showframe=false]{geometry} % Márgenes
+\usepackage{fancyhdr} % Encabezados y pies de página
+\usepackage{setspace}
+\singlespacing
+\setlength{\parindent}{0pt} % Zero indent until abstract
+\renewcommand{\baselinestretch}{1} % Line spacing
+\usepackage{comment}
+\newcommand \itsubsection{\titleformat{\subsection} {\normalfont \itshape}{\thesubsection}{1 em}{}}
+\usepackage{titlesec} % Formato de títulos
+\titleformat*{\section}{\large\bf}
+\titleformat*{\subsection}{\large\bf}
+\usepackage[bottom,hang,flushmargin]{footmisc}
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\renewcommand{\footnotelayout}{\scriptsize}
+
+
+%%% Tables
+\usepackage{pdflscape} % Para orientación horizontal en páginas específicas
+\usepackage{makecell} %% two lines in titles of tables
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{multicol}
+\usepackage{threeparttable}
+\usepackage{caption}
+\captionsetup[table]{labelfont=bf, labelsep=newline , name=Tabla}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\captionsetup{font=small, 
+              format=plain,
+              justification=justified
+}
+
+%%% Figures and graphics
+\usepackage{graphicx} % Including pictures
+\usepackage{wrapfig} % In-line images
+\usepackage{float} % Precise image placement
+\usepackage{subcaption} % Subfigures
+\usepackage{newfloat} % Custom floating environments
+\DeclareFloatingEnvironment[name=Map]{map}
+\captionsetup[figure]{labelfont=bf, labelsep=newline , name=Figure}
+\captionsetup[map]{labelfont=bf, labelsep=newline}
+\captionsetup{justification=centering}
+\renewcommand{\figurename}{Figura}
+\usepackage{ragged2e} 
+\usepackage{changepage}
+
+%%% Miscellaneous
+\usepackage{ulem} % Strikethrough text, etc.
+\usepackage{todonotes} % To-do notes
+\usepackage{tikz} % Drawing and graphs
+\usepackage{blindtext} % Dummy text
+
+%%% Bibliography and citations
+\usepackage{natbib}
+\usepackage{xcolor}  % Paquete para manejar colores
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.75}
+\usepackage{hyperref}
+\hypersetup {
+    colorlinks=true,
+    citecolor=darkblue,
+    linkcolor=darkblue,
+    urlcolor=darkblue
+}
+
+
+

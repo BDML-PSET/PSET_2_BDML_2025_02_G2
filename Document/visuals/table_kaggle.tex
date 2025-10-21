@@ -1,0 +1,38 @@
+
+
+\begin{table}[H]
+\centering
+\caption{Comparación de modelos XGBoost}
+\label{tab:comparacion_xgb}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}cccccccccccc@{}}
+\toprule
+\textbf{Top} & 
+\textbf{Algoritmo} & 
+\textbf{Métrica} & 
+\textbf{Rebalanceo} & 
+\textbf{Trees} & 
+\textbf{Eta} & 
+\makecell{\textbf{max}\\\textbf{depth}} & 
+\makecell{\textbf{min\_child}\\\textbf{weight}} & 
+\textbf{Gamma} & 
+\makecell{\textbf{colsample}\\\textbf{bytree}} & 
+\textbf{subsample} & 
+\textbf{F1-Score} \\ 
+\midrule
+1 & XGBoost & F1 & No & 500 & 0.04 & 7 & 25 & 0 & 0.6 & 0.8 & 73 \\
+2 & XGBoost & F1 & Weights & 500 & 0.03 & 8 & 25 & 0 & 0.8 & 0.9 & 72 \\
+3 & XGBoost & F1 & Weights & 500 & 0.05 & 10 & 20 & 1 & 0.9 & 1 & 72 \\
+4 & XGBoost & Regla de Bayes & Weights & 500 & 0.03 & 8 & 25 & 0 & 0.8 & 0.9 & 72 \\
+5 & XGBoost & Regla de Bayes & No & 500 & 0.03 & 8 & 25 & 0 & 0.8 & 0.9 & 71 \\
+6 & XGBoost & Regla de Bayes & No & 500 & 0.04 & 7 & 25 & 0 & 0.6 & 0.8 & 70 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+\medskip
+\begin{minipage}{\textwidth}
+\tiny
+\textit{Nota:}  Esta tabla muestra,las seis mejores predicciones de la competencia en Kaggle.
+
+\end{minipage}

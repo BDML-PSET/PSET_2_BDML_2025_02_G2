@@ -210,7 +210,10 @@ continuas_table <- continuas |>
       paste0("Observaciones (TP, FN, FP): ",
              sum(test$outliers == "No"), ", ",
              sum(test$outliers == "over"), ", ",
-             sum(test$outliers == "under"))
+             sum(test$outliers == "under")),
+      "TP: pobres correctamente clasificados", 
+      "FN: pobres clasificados como no pobres",
+      "FP: no pobres clasificados como pobres."
     ),
     general_title = "", 
     escape = FALSE

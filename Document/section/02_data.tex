@@ -1,0 +1,34 @@
+%%% Data  %%%
+\section{Datos}
+
+
+\subsection{Origen y adecuación de los datos}
+En Colombia, el DANE es la entidad responsable de las encuestas oficiales de pobreza\footnote{Dispuesto en la \textit{Ley 2335 de 2023}, aprobada por el Congreso de la República de Colombia, ``por la cual se expiden disposiciones sobre las estadísticas oficiales en el país'' \cite{Ley2335_2023}.}, con datos que poseen representatividad departamental, municipal y por áreas urbana y rural según la operación estadística. Particularmente, este estudio utiliza la Misión de Empalme de las Series de Empleo, Pobreza y Desigualdad (MESE) de 2018, que reúne información a nivel de hogar e individual para los 33 departamentos, incluido Bogotá, con el fin de clasificar los hogares en situación de pobreza monetaria según sus características socioeconómicas
+
+Durante el procesamiento de la muestra se adoptaron diversas decisiones metodológicas para garantizar la coherencia y pertinencia de los predictores empleados en la estimación de la pobreza a nivel de hogar. En primer lugar, se conservaron únicamente las variables presentes tanto en los datos de entrenamiento como en los de prueba, asegurando que el modelo tuviera acceso al mayor número posible de predictores comunes, es decir, se mantuvieron las 63 variables de la base de peronas y las 16 de hogares. Asimismo, se excluyeron las observaciones correspondientes a Bogotá, dado que sus particularidades económicas, laborales e institucionales podrían distorsionar los patrones generales de aprendizaje y reducir la capacidad de generalización del modelo.
+
+Posteriormente, se efectuó la limpieza y depuración de las bases. A nivel de hogar, se mantuvieron variables asociadas con las condiciones habitacionales como el número total de cuartos, los cuartos para dormir, el tipo de tenencia y el valor del arriendo (imputado en viviendas propias), la composición del hogar (cantidad de personas y de miembros en la unidad de gasto) y la localización geográfica (zona urbana o rural, departamento, pertenencia a ciudad principal y valor de la línea de pobreza). Estas variables permiten capturar la heterogeneidad territorial y las diferencias regionales en la incidencia de la pobreza.
+
+En cuanto a la base de personas, se procedió a su agregación al nivel de hogar para evitar duplicidad de observaciones. Esta agregación se estructuró en tres conjuntos de predictores: (1) características demográficas y laborales agregadas del hogar, como edad promedio, educación, informalidad, participación laboral, régimen de salud y estructura etaria; (2) características laborales de los miembros ocupados, incluyendo posición ocupacional, tamaño de empresa, jornada, tiempo de vinculación y tipo de remuneración; y (3) características específicas del jefe del hogar, consideradas por su importancia como principal proveedor de recursos. 
+
+
+La batería final de variables estuvo compuesta por 151 predictores, incluyendo variables originales y derivadas. Se generaron variables dummy para  variables geográficas (como departamento, dominio urbano/rural) y para variables categóricas como el tipo de vivienda, régimen de salud y nivel educativo, entre otras. Adicionalmente, se calcularon promedios y proporciones a nivel del hogar a partir de la base de personas, incluyendo la edad promedio, el número de mujeres, el número de personas dependientes y las horas trabajadas, entre otras métricas relevantes.
+
+El proceso integral de limpieza, integración y agregación de las bases resultó en un conjunto robusto y coherente de predictores, adecuados para el desarrollo de un modelo de aprendizaje automático capaz de capturar los determinantes estructurales de la pobreza a nivel de hogar. 
+
+
+
+\subsection{Análisis descriptivo}
+La Tabla \ref{tab:descriptivas}  presenta las principales características de los hogares colombianos (exceptuando a Bogotá, DC) según su condición de pobreza para el año 2018. Se observa que, en promedio, los hogares pobres presentan una estructura más numerosa y residen en viviendas con menos cuartos disponibles, mostrando condiciones de hacinamiento relativas frente a los no pobres. Mientras los hogares no pobres reportan un promedio de 3.5 cuartos y 3.1 personas, los pobres cuentan con 3.0 cuartos y 4.2 integrantes, respectivamente. Esta diferencia en la densidad habitacional nos muestra ciertas restricciones de espacio vinculadas a menores ingresos y menor capacidad de acceso a vivienda adecuada.
+
+De igual manera, en lo que respecta a los ingresos y tenencia de vivienda, el gasto promedio en arriendo de los hogares pobres es casi la mitad del reportado por los no pobres, esto se relaciona a su vez con la restricción presupuestal como su posible localización en zonas con menores costos de vivienda. La distribución de la propiedad también refuerza esta diferencia: el 41\% de los hogares no pobres son propietarios sin deuda, frente al 28\% entre los pobres, mientras que la proporción de hogares con vivienda prestada o en usufructo es casi cuatro veces mayor entre los pobres (11\% vs. 3\%).
+
+Desde el punto de vista demográfico, los hogares pobres son más jóvenes: la edad promedio de sus integrantes es de 30.6 años, frente a 39.2 años en los no pobres. Además, la proporción de menores de edad es mayor entre los pobres (37\% menores de 18 años y 11\% menores de 5), lo cual, se asocia con mayores tasas de dependencia económica. En contraste, los hogares no pobres concentran una mayor proporción de adultos mayores, lo que presuntamente podría vincularse con estabilidad patrimonial o acceso a pensiones.
+
+Las variables laborales y educativas refuerzan la idea de desigualdad. Aunque la proporción de ocupación informal es similar entre grupos, los pobres presentan una mayor proporción de trabajadores por cuenta propia (56\% vs. 37\% en los no pobres) y una mayor afiliación al régimen subsidiado de salud (58\% vs. 32\%), reforzando un vínculo estrecho entre exclusión laboral y vulnerabilidad económica. La incidencia de jóvenes que no estudian ni trabajan (“ninis”) es más del doble entre los hogares pobres, lo que puede perpetuar las brechas de ingresos en el largo plazo.
+
+En cuanto al entorno, la pobreza mantiene una fuerte concentración urbana (86 \% de los hogares pobres), aunque su presencia relativa es mayor en zonas rurales (15 \% frente a 9 \% en los no pobres), donde las oportunidades de empleo formal y acceso a servicios básicos suelen ser más limitadas.
+
+Por todo lo anterior, este análisis descriptivo orienta la selección de predictores relevantes y la posterior modelación, al resaltar las variables más asociadas con la probabilidad de que un hogar sea pobre.
+
+\input{visuals/tabla_descriptiva}
