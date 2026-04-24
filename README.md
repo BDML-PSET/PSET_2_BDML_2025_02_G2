@@ -2,7 +2,8 @@
 
 Este proyecto tiene como objetivo predecir la condición de pobreza de los hogares en Colombia para el año 2018, utilizando información proveniente de hogares y personas. El flujo de trabajo se estructura en tres etapas principales: limpieza, modelamiento y predicción, así como generación de visualizaciones. Cada etapa se encuentra organizada en carpetas diferenciadas y sigue convenciones de nombres específicas.
 
-<!---------------------------------------------------------------------->
+today i have engñish class
+<!----------------------------------------------------nncnbbcdcbbhcdb------------------>
 <!---------------------------------------------------------------------->
 <!---------------------------------------------------------------------->
 ## scripts
